@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chris's Instrument Collection</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <br>
+    <br>
+    <h1>Chris's Instrument Collection</h1>
+    <br>
+    <br>
+    <p>Filter by # of strings:</p>
+    <br>
+    <div class="btn_container">
+        <button class="filter-btn" data-id="All">All</button>
+        <button class="filter-btn" data-id="3">3</button>
+        <button class="filter-btn" data-id="5">5</button>
+        <button class="filter-btn" data-id="6">6</button>
+        <button class="filter-btn" data-id="8">8</button>
+        <button class="filter-btn" data-id="8+">8+</button>
+    </div>
+    <br>
+    <br>
+    <div class="section-center">
+        <div class="guitar-item">
+            <img class="photo" src="6.jpeg" alt="6">
+            <p>6 strings</p>
+        </div>
+    </div>
+
+    <script>
+        const guitars = [
+        {
+                image: 'phin.webp',
+                alt: '3',
+                name: 'Phin'
+            },
+
+            {
+                image: 'schecter.jpeg',
+                alt: '5',
+                name: 'Schecter Stiletto'
+            },
+
+            {
+                image: 'warrior.jpg',
+                alt: '6',
+                name: 'Jackson Warrior'
+            },
+
+            {
+                image: 'iceman.jpeg',
+                alt: '6',
+                name: 'Ibanez Iceman'
+            },
+
+            {
+                image: 'fender.jpeg',
+                alt: '6',
+                name: 'Fender FA135-CE'
+            },
+
+            {
+                image: 'gretsch.jpeg',
+                alt: '6',
+                name: 'Gretsch G5420T'
+            },
+
+            {
+                image: 'rg8.jpeg',
+                alt: '8',
+                name: 'Ibanez RG-8'
+            },
+
+            {
+                image: 'oud.webp',
+                alt: '8+',
+                name: 'Semi Hollow Mahogany Electric Oud'
+            }
+        ]
+
+        const sectionCenter = document.querySelector('.section-center');
+        const btns = document.querySelectorAll('.filter-btn');
+
+
+
+        window.addEventListener('DOMContentLoaded', function () {
+            displayGuitarMenu(guitars);
+        })
+
+        btns.forEach(function (btn) {
+            btn.addEventListener('click', function (e) {
+                let strings = e.currentTarget.dataset.id;
+                let guitarFilter = guitars.filter(function (item) {
+                    if (item.alt === strings) {
+                        return item;
+                    }
+                })
+                if (strings === 'All') {
+                    displayGuitarMenu(guitars);
+                } else {
+                    displayGuitarMenu(guitarFilter);
+                }
+            })
+        })
+
+        function displayGuitarMenu(array) {
+            let guitarMap = array.map(function (item) {
+                return `        <div class="guitar-item">
+            <img class="photo" src="${item.image}" alt="${item.alt}">
+            <p>${item.name}</p>
+        </div>`
+            })
+            guitarMap = guitarMap.join('');
+            sectionCenter.innerHTML = guitarMap;
+        }
+    </script>
+</body>
+
+</html>
